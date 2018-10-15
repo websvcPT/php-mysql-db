@@ -1,0 +1,20 @@
+{
+    "name": "websvc/php-mysql-db",
+    "type": "library",
+    "description": "A PHP interface for mysql.",
+    "version": "1.0.0",
+    "require": {
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nelson Dias",
+            "homepage": "https://github.com/websvcPT/php-mysql-db"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "PhpRocketChatWebhooks\\": "src/"
+        }
+    }
+}
