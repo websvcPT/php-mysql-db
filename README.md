@@ -36,7 +36,7 @@ composer require websvc/php-monolog-wrapper 1.0.0
 
 ```php
 
-$log = new websvc/php-monolog-wrapper('logger-name', [
+$log = new websvc/PhpMonologWrapper('logger-name', [
             'logFile' => '/tmp/mylog.log',
             'loggerLevel'=> 'DEBUG',    // Set logging level
             'toStderr'=> true           // Log output to stderr
