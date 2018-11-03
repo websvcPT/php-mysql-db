@@ -3,7 +3,7 @@
 namespace PhpMysqlDb;
 
 /**
- * @author Nelson Dias <nelsondias@w4msolutions.com>
+ * @author Nelson Dias <nelson@websvc.net>
  * 
  * @file Db.php
  * @creation Apr 22, 2017 
