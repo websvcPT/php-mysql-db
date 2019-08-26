@@ -2,7 +2,7 @@
     "name": "websvc/php-mysql-db",
     "type": "library",
     "description": "A PHP interface for mysql.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": {
     },
     "license": "MIT",
