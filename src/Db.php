@@ -118,6 +118,11 @@ class Db
     public function query($query)
     {
         $result = $this->connection->query($query);
+        if ($this->connection->error) {
+            $msg = "Failed to execute query: " . $this->connection->error;
+            $this->addLog($msg, 'CRITICAL', [__FUNCTION__]);
+            throw new Exception($msg);
+        }
         $this->addLog($query, 'DEBUG', [__CLASS__, __FUNCTION__]);
         return $result;
     }
@@ -220,5 +225,15 @@ class Db
         if ($this->logger) {
             $this->logger->addLog($mode, $msg, $context);
         }
+    }
+
+    /**
+     * Closes mysql Connection
+     *
+     * @return void
+     */
+    public function close()
+    {
+        @mysqli_close($this->connection);
     }
 }
