@@ -61,31 +61,37 @@ class Db
      */
     protected $password = null;
 
-    public function __construct($host, $username, $password, $database)
+    /**
+     * MySQL server port
+     *
+     * @var int
+     */
+    protected $port = 3306;
+
+    /**
+     * Initialize DB connection
+     */
+    public function __construct($host, $username, $password, $database, $port = 3306)
     {
         $this->host = $host;
         $this->username = $username;
         $this->password = $password;
         $this->database = $database;
+        $this->port = $port;
 
-        $this->openDb($this->host, $this->username, $this->password, $this->database);
+        $this->openDb();
     }
 
     /**
      * Open a connection to database
      *
-     * @param string $host
-     * @param string $username
-     * @param string $password
-     * @param string $database
-     *
      * @throws Exception
      * @throws \InvalidArgumentException
      */
-    protected function openDb($host, $username, $password, $database)
+    protected function openDb()
     {
         try {
-            if ($host == '' || $username == '' || $database == '') {
+            if (empty($this->host) || empty($this->username) || empty($this->database)) {
                 $this->addLog('Missing DB connection data', 'CRITICAL', [__FUNCTION__]);
                 throw new \InvalidArgumentException("Missing DB connection data");
             }
@@ -93,7 +99,13 @@ class Db
             $this->connection = mysqli_init();
 
             try {
-                $this->connection->real_connect($host, $username, $password, $database);
+                $this->connection->real_connect(
+                    $this->host,
+                    $this->username,
+                    $this->password,
+                    $this->database,
+                    $this->port
+                );
             } catch (Exception $e) {
                 throw new Exception('Error on DB connect ' . $e);
             }
