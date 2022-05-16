@@ -69,6 +69,13 @@ class Db
     protected $port = 3306;
 
     /**
+     * MySQL operation affected rows
+     *
+     * @var int
+     */
+    protected $affected_rows = 0;
+
+    /**
      * Initialize DB connection
      */
     public function __construct($host, $username, $password, $database, $port = 3306)
@@ -106,6 +113,7 @@ class Db
                     $this->database,
                     $this->port
                 );
+                $this->connection->autocommit(true);
             } catch (Exception $e) {
                 throw new Exception('Error on DB connect ' . $e);
             }
@@ -135,6 +143,7 @@ class Db
             $this->addLog($msg, 'CRITICAL', [__FUNCTION__]);
             throw new Exception($msg);
         }
+        $this->affected_rows = $this->connection->affected_rows;
         $this->addLog($query, 'DEBUG', [__CLASS__, __FUNCTION__]);
         return $result;
     }
