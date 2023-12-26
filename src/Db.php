@@ -223,6 +223,16 @@ class Db
     }
 
     /**
+     * Get affected rows
+     *
+     * @return integer
+     */
+    public function getAffectedRows()
+    {
+        return $this->affected_rows;
+    }
+
+    /**
      * Defines a log handler for the class
      *
      * @param object $logHandler
